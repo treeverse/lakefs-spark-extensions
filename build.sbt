@@ -1,8 +1,8 @@
-Project("lakefs-iceberg-extension")
+lazy val project = Project("lakefs-iceberg-extension", file("./src/"))
 
 semanticdbEnabled := true
 semanticdbVersion := scalafixSemanticdb.revision
-scalacOptions += "-Ywarn-unused-import",
+scalacOptions += "-Ywarn-unused-import"
 
 libraryDependencies ++= Seq(
   "io.lakefs" % "api-client" % "0.91.0",
