@@ -1,4 +1,4 @@
-lazy val project = Project("lakefs-iceberg-extension", file("./src/"))
+lazy val project = Project("lakefs-spark-extension", file("./src/"))
 
 semanticdbEnabled := true
 semanticdbVersion := scalafixSemanticdb.revision

@@ -25,7 +25,7 @@ Run `sbt package`, then add
 
 ```
 --conf spark.sql.extensions=io.lakefs.iceberg.extension.LakeFSSparkSessionExtensions \
---jars ./target/scala-2.12/learn-udtf_2.12-0.1.0-SNAPSHOT.jar`
+--jars ./target/scala-2.12/lakefs-spark-extensions_2.12-0.1.0-SNAPSHOT.jar`
 ```
 
 ## Available extensions
