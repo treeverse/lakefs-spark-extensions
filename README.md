@@ -40,14 +40,14 @@ schema_diff(PREFIX, FROM_SCHEMA, TO_SCHEMA, TABLE)
 
 yields a relation that compares the "from" table `PREFIX.FROM_SCHEMA.TABLE`
 with the "to" table `PREFIX.TO_SCHEMA.TABLE`.  Elements of "to" but not
-"from" are _added_ and appear with `change='+'`, elements of "from" but not
-"to" are _deleted_ and appear with `change='-'`.
+"from" are _added_ and appear with `lakefs_change='+'`, elements of "from" but not
+"to" are _deleted_ and appear with `lakefs_change='-'`.
 
 For instance,
 
 ```sql
-SELECT change, Player, COUNT(*) FROM schema_diff('lakefs', 'main~', 'main', 'db.allstar_games')
-GROUP BY change, Player;
+SELECT lakefs_change, Player, COUNT(*) FROM schema_diff('lakefs', 'main~', 'main', 'db.allstar_games')
+GROUP BY lakefs_change, Player;
 ```
 
 uses lakeFS Iceberg support to compute how many rows were changed for each

@@ -34,9 +34,9 @@ object SchemaDiff {
     val toTableName = tableAt(prefix, toSchema, suffix)
 
     s"""
-      (SELECT '+', * FROM (SELECT * FROM $toTableName EXCEPT SELECT * FROM $fromTableName))
+      (SELECT '+' lakefs_change, * FROM (SELECT * FROM $toTableName EXCEPT SELECT * FROM $fromTableName))
       UNION ALL
-      (SELECT '-', * FROM (SELECT * FROM $fromTableName EXCEPT SELECT * FROM $toTableName))
+      (SELECT '-' lakefs_change, * FROM (SELECT * FROM $fromTableName EXCEPT SELECT * FROM $toTableName))
     """
   }
 
