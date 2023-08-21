@@ -1,4 +1,9 @@
+lazy val projectVersion = "0.0.1"
+
 lazy val project = Project("lakefs-spark-extension", file("./src/"))
+  .settings(
+    version := projectVersion,
+  )
 
 semanticdbEnabled := true
 semanticdbVersion := scalafixSemanticdb.revision
@@ -16,6 +21,21 @@ libraryDependencies ++= Seq(
   "org.scalatestplus" %% "scalacheck-1-17" % "3.2.16.0" % "test",
 )
 
+val nexus = "https://s01.oss.sonatype.org/"
+lazy val publishSettings = Seq(
+  publishTo := {
+    if (isSnapshot.value) Some("snapshots" at nexus + "content/repositories/snapshots")
+    else Some("releases" at nexus + "service/local/staging/deploy/maven2")
+  },
+  // Remove all additional repository other than Maven Central from POM
+  pomIncludeRepository := { _ => false },
+  credentials ++= Seq(
+    Credentials(Path.userHome / ".sbt" / "credentials"),
+    Credentials(Path.userHome / ".sbt" / "sonatype_credentials")
+  )
+)
+
+ThisBuild / isSnapshot := false
 ThisBuild / versionScheme := Some("early-semver")
 ThisBuild / organization := "io.lakefs"
 ThisBuild / organizationName := "Treeverse Labs"
