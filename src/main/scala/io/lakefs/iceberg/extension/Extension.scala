@@ -10,7 +10,7 @@ import org.apache.spark.sql.catalyst.expressions.StringLiteral
 
 // A table-valued function to compute the difference between the same table
 // at two schemas.
-object SchemaDiff {
+object TableDataDiff {
   private def computeString(e: Expression): String = {
     val literalValue = StringLiteral.unapply(e)
     literalValue match {
@@ -53,15 +53,15 @@ object SchemaDiff {
     spark.sql(sqlString).queryExecution.logical
   }
 
-  val function = (FunctionIdentifier("schema_diff"),
-    new ExpressionInfo("io.lakefs.iceberg.extension.SchemaDiff$",
-      "", "schema_diff", "schema_diff('TABLE_PREFIX', 'FROM_SCHEMA', 'TO_SCHEMA', 'TABLE_SUFFIX')",
-      "schema_diff('TABLE_PREFIX', 'FROM_SCHEMA', 'TO_SCHEMA', 'TABLE_SUFFIX')"),
+  val function = (FunctionIdentifier("refs_data_diff"),
+    new ExpressionInfo("io.lakefs.iceberg.extension.TableDataDiff$",
+      "", "refs_data_diff", "refs_data_diff('TABLE_PREFIX', 'FROM_SCHEMA', 'TO_SCHEMA', 'TABLE_SUFFIX')",
+      "refs_data_diff('TABLE_PREFIX', 'FROM_SCHEMA', 'TO_SCHEMA', 'TABLE_SUFFIX')"),
     tdfBuilder _)
 }
 
 class LakeFSSparkSessionExtensions extends (SparkSessionExtensions => Unit) {
   override def apply(extensions: SparkSessionExtensions): Unit = {
-    extensions.injectTableFunction(SchemaDiff.function)
+    extensions.injectTableFunction(TableDataDiff.function)
   }
 }

@@ -24,7 +24,7 @@ class ExtensionSpec extends AnyFunSpec
         val df2 = Seq(("a", 1), ("xyzzy", 2), ("c", 3), ("d", 4)).toDF
         df2.writeTo("spark_catalog.second.table").create()
 
-        val diff = spark.sql("SELECT * FROM schema_diff('spark_catalog', 'first', 'second', 'table')")
+        val diff = spark.sql("SELECT * FROM refs_data_diff('spark_catalog', 'first', 'second', 'table')")
           .collect()
           .toSet
         diff should equal(Set(Row("-", "b", 2), Row("+", "xyzzy", 2), Row("+", "d", 4)))
