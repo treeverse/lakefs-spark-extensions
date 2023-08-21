@@ -50,7 +50,6 @@ object SchemaDiff {
     }
     val Seq(tablePrefix, fromSchema, toSchema, tableSuffix) = e.map(computeString)
     val sqlString = sql(tablePrefix, fromSchema, toSchema, tableSuffix)
-    print(s"[DEBUG] $sqlString")
     spark.sql(sqlString).queryExecution.logical
   }
 
