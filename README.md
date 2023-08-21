@@ -32,10 +32,10 @@ Run `sbt package`, then add
 
 ### Schema diff
 
-`schema_diff` is a Spark SQL table-valued function.  The expression
+`refs_data_diff` is a Spark SQL table-valued function.  The expression
 
 ```sql
-schema_diff(PREFIX, FROM_SCHEMA, TO_SCHEMA, TABLE)
+refs_data_diff(PREFIX, FROM_SCHEMA, TO_SCHEMA, TABLE)
 ```
 
 yields a relation that compares the "from" table `PREFIX.FROM_SCHEMA.TABLE`
@@ -46,7 +46,7 @@ with the "to" table `PREFIX.TO_SCHEMA.TABLE`.  Elements of "to" but not
 For instance,
 
 ```sql
-SELECT lakefs_change, Player, COUNT(*) FROM schema_diff('lakefs', 'main~', 'main', 'db.allstar_games')
+SELECT lakefs_change, Player, COUNT(*) FROM refs_data_diff('lakefs', 'main~', 'main', 'db.allstar_games')
 GROUP BY lakefs_change, Player;
 ```
 
@@ -58,5 +58,5 @@ you can set up a view with it:
 
 ```sql
 CREATE TEMPORARY VIEW diff_allstar_games_main_last_commit AS
-    schema_diff('lakefs', 'main~', 'main', 'db.allstar_games');
+    refs_data_diff('lakefs', 'main~', 'main', 'db.allstar_games');
 ```
