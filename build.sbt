@@ -7,6 +7,8 @@ scalacOptions += "-Ywarn-unused-import"
 libraryDependencies ++= Seq(
   "io.lakefs" % "api-client" % "0.91.0",
   "org.apache.spark" %% "spark-sql" % "3.2.4" % "provided",
+  "org.apache.spark" %% "spark-hive" % "3.2.4" % "test",
+  "joda-time" % "joda-time" % "2.12.5" % "test",
 
   // TODO(ariels): Wrap api-client calls in: "dev.failsafe" % "failsafe" % "3.2.4",
 
