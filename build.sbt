@@ -1,4 +1,4 @@
-lazy val projectVersion = "0.0.3-RC.0"
+lazy val projectVersion = "0.0.3"
 
 version := projectVersion
 
