@@ -1,9 +1,6 @@
-lazy val projectVersion = "0.0.1"
+lazy val projectVersion = "0.0.3-RC.0"
 
-lazy val project = Project("lakefs-spark-extension", file("./src/"))
-  .settings(
-    version := projectVersion,
-  )
+version := projectVersion
 
 semanticdbEnabled := true
 semanticdbVersion := scalafixSemanticdb.revision
