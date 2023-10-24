@@ -30,7 +30,7 @@ Run `sbt package`, then add
 
 ## Available extensions
 
-### Schema diff
+### Data diff
 
 `refs_data_diff` is a Spark SQL table-valued function.  The expression
 
